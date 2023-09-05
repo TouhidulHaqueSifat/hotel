@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Welcome {{user.username}}</h3>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center mt-auto mx-5 h-30">
+    {%for item in item%}
+    <div class="col">
+        <div class="card h-100  ">
+
+          <img src="{{item.image.url}}" >
+          <div class="card-body">
+            <a href="{% url 'hotel_detail' item.id %}" class = "text-decoration-none"> 
+                <h5 class="card-title">{{item.name}}</h5>
+
+            </a>
+            <p class="card-text">{{item.description}}</p>
+          </div>
+          
+        </div>
+      </div>
+    {% endfor %}
+
+    
+  </div>
+
+{% endblock %}

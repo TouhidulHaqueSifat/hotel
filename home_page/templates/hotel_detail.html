@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class="card mb-3 w-100  mt-3 mx-5 h-10 ">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{details.image.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{details.name}}</h5>
+          <h5 class="card-title">Location: {{details.area}}</h5>
+          <p class="card-text">{{details.description}}</p>
+        </div>
+      </div>
+      
+      
+    </div>
+ </div>
+ 
+  {% for review in review %}
+      <p class= "font-monospace text-start mx-5">Reviews (UserName: {{review.user.username}}): {{ review.comment }}</p>
+      <p class="font-monospace text-start mx-5 ">Rating: {{ review.ratting }} </p>
+      
+      {%if user == review.user%}
+      <a class=" mx-5 mb-3 btn btn-danger" href="{% url 'edit' review.id%}">Edit</a>
+      <a class=" mx-5 mb-3 btn btn-danger" href="{% url 'delete' review.id%}">Delete</a>
+      
+      
+      {% endif%}     
+  {% endfor %}
+
+  
+<div class="mt-2">  
+{%if user.is_authenticated%}
+<a class="btn btn-primary " href="{%url 'review_hotel' details.id%}">Add review</a>
+{% endif%}
+</div>
+ 
+{% endblock %}
